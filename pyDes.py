@@ -190,7 +190,7 @@ class _baseDes(object):
 			data += (self.block_size - (len(data) % self.block_size)) * pad
 		
 		elif padmode == PAD_PKCS5:
-			pad_len = 8 - (len(data) % self.block_size)
+			pad_len = 0 if len(data) % 8 == 0 else 8 - (len(data) % self.block_size)
 			if _pythonMajorVersion < 3:
 				data += pad_len * chr(pad_len)
 			else:
